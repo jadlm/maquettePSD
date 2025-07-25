@@ -1,0 +1,1053 @@
+  <!DOCTYPE html>
+  <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <title>Navbar avec icônes et avatar</title>
+    
+    <style>
+      .logo {
+       display: flex;
+       align-items: center;
+        justify-content: center;
+        
+      }
+      .div1 {
+      grid-column: span 3 / span 3;
+    }
+
+    .div2 {
+      grid-column-start: 4;
+    }
+
+    .div3 {
+      grid-column-start: 5;
+    }
+
+    .div4 {
+      grid-column-start: 6;
+    }
+
+    .div5, .div6, .div7, .div8, .div9, .div10 {
+      grid-row-start: 2;
+    }
+
+    .div12, .div13 {
+      grid-row-start: 3;
+    }
+
+    .div17 {
+      grid-column-start: 2;
+      grid-row-start: 4;
+    }
+
+    .div18 {
+      grid-column-start: 3;
+      grid-row-start: 4;
+    }
+
+    .div19 {
+      grid-column-start: 4;
+      grid-row-start: 4;
+    }
+
+    .div20 {
+      grid-column-start: 5;
+      grid-row-start: 4;
+    }
+
+    .div21 {
+      grid-column-start: 6;
+      grid-row-start: 4;
+    }
+    .parent {
+  position: absolute;    /* position absolue */
+  left: 1052px;          /* position horizontale */
+  top: 98px;            /* position verticale */        /* largeur cadre */
+  height: auto;   
+  width: 375px;       /* hauteur cadre */
+  
+  gap: 0px;
+ margin: 1px;
+
+}
+
+    /* Style commun aux liens/icônes */
+    .parent a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 5px;
+      width: 15px; /* hauteur fixe, adapte selon ton besoin */
+      text-decoration: none;
+    }
+
+    .parent a img {
+      max-height: 40px;
+      max-width: 40px;
+      border-radius: 30%;
+    }
+      /* Container principal avec la taille fixe du plan de travail */
+      .container {
+        width: 1400px;
+        height: 840px;
+        margin: 0 auto;
+        position: relative;
+        background-color: #f0f0f0; /* tu peux changer la couleur */
+        overflow: hidden; /* pour cacher ce qui dépasse */
+        font-family: Arial, sans-serif;
+        border: 1px solid #ccc; /* juste pour voir la limite du cadre */
+      }
+
+      /* Navbar */
+      .navbar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        background: #4a0f08;
+        height: 77px;
+        padding: 0 24px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        z-index: 1000;
+        box-shadow: 0px 15px 18px 0px rgba(0,0,0,0.75)
+      }
+      .icon1 img, .icon2 img {
+        width: 36px;
+        height: 36px;
+        background: transparent;
+      }
+      .navbar-user, .navbar-location {
+        color: #fff;
+        font-size: 1em;
+        margin: 0 10px;
+        font-style: italic;
+        opacity: 0.85;
+      }
+      .navbar-avatar {
+        width: 40px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 10px;
+        border: 2px solid #fff;
+      }
+
+      .navbar-user-container {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        margin-right: 150px;
+      }
+      .navbar-logo {
+        display: flex;
+        align-items: center;
+        position: relative;
+        right: 70px;
+        margin: 0 30px;
+        
+      }
+      .navbar-logo img {
+        height: 130px;
+        position: relative;
+        margin-top: 50px;
+            }
+      .navbar-logo-text {
+        color: #e31414;
+        font-size: 1.1em;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 500;
+        line-height: 1.1;
+        text-align: left;
+      }
+      .navbar-search {
+        display: flex;
+        align-items: center;
+        background: transparent;
+        border-radius: 20px;
+        position: relative;
+        right: 140px;
+      }
+      .navbar-search-icon {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        margin-right: 6px;
+        filter: brightness(0) invert(1);
+        left: 70px;
+      }
+      .navbar-search input {
+        background: transparent;
+        position: relative;
+        border: none;
+        color: #fff;
+        font-size: 1em;
+        outline: none;
+        width: 230px;
+        font-style: italic;
+        padding: 4px 0;
+        left: 70px;
+      }
+      .navbar-btn-group {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .navbar-btn {
+          background: transparent;
+          border: 1px solid #fff;
+          color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.3em;
+          border-radius: 6px;
+          width: 38px;
+          height: 38px;
+          padding: 20px 25px;
+          cursor: pointer;
+          transition: background 0.2s;
+      }
+
+      .navbar-btn img {
+          width: 15px;
+          height: 15px;
+      }
+
+      .navbar-btn:hover {
+        background: #fff2;
+      }
+
+    /* Barre de recherche cachée au départ */
+    .search-bar {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 30px;
+      overflow: hidden;
+      transition: width 0.3s ease;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 100px;
+
+    }
+
+    /* Input de recherche */
+    .search-bar input {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    /* Quand la barre est active (ouverte) */
+    .search-bar.active {
+      width: 200px; /* taille ouverte */
+    }
+
+    .icon2 {
+      position: relative;
+      left: 4px;
+    }
+
+      .icon4 {
+        left: 1240px;
+        width: 51px;
+        height: 39px;
+      }
+
+      .icon5 {
+        left: 1318.5px;
+        width: 51px;
+        height: 39px;
+      }
+      .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 45px;  /* juste en dessous de l’icône */
+      right: 0;
+      background-color: #fff;
+      min-width: 150px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 15px;
+      color: #4a0f08;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #4a0f08;
+      color: white;
+    }
+
+    /* Quand dropdown est ouvert */
+    .icon5.open .dropdown-content {
+      display: block;
+    }
+
+      /* Images positionnées dans le container */
+      .image-top {
+    position: absolute;
+    top: 180px;
+    left: 39px;
+    width: 359px;
+    height: 301px;
+    z-index: 1;
+  }
+
+
+      .banniere {
+    position: absolute;
+    top: 63px;   /* position verticale */
+    left: 0;  /* position horizontale */
+    width: 478px; /* ta largeur actuelle */
+    height: 184px; /* ta hauteur actuelle */
+    z-index: 2;
+  }
+
+      .groupe3 {
+        position: absolute;
+        top: 94px;
+        left: 412px;
+        width: auto;
+        height: auto;
+        z-index: 3;
+      }
+
+      .image-large {
+        position: absolute;
+        top: -103px;
+        left: 460px;
+        width: 580px;
+        height: 619px;
+        z-index: 0;
+      }
+      .image-fenetre {
+    position: absolute;
+    top: 5px;
+    left: 400px;
+    width: auto;
+    height: auto;
+    z-index: 2;
+  }
+
+      .main-content {
+        position: relative;
+        z-index: 6;
+      }
+   
+
+  .image-position {
+    position: absolute;
+    left: -22px;
+    top: 50px;
+    width: 89px;
+    height: 788px;
+  }
+  .image-position-2 {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 1379px;
+    height: 655px;
+    z-index: -1;
+  }
+
+
+ 
+
+
+  .image-ch {
+    position: absolute;
+    top: -20px;
+    left: 435px;
+    height: auto;
+    }
+
+
+  .image-position-droite {
+    position: absolute;
+    top: 735px;
+    left: 1303px;   /* 15px + 200px + 15px (marge) */
+      /* même taille ou ajustée selon le besoin */
+    height: auto;
+    z-index: 1;
+  }
+  .image-position-haut {
+    position: absolute;
+    top: 584px;
+    left: 150px;
+      /* ajuste selon l’image */
+    height: auto;
+    z-index: 1;
+  }
+  .titre-container {
+        position: absolute;
+        top: 350px;   /* Ajuste selon besoin */
+        left: 1200px; /* Ajuste selon besoin */
+        width: 300px; /* Largeur fixe pour gérer alignements */
+      }
+
+      .titre-principal {
+        font-size: 28px;
+        font-family: 'Montserrat', italic;
+        color: #e31414;
+        margin: 0 120px 10px 0;
+        font-weight: 100; /* Thin */
+        text-align: center; /* Centré dans le conteneur */
+      }
+
+      .sous-titre {
+        font-size: 16px;
+        position: relative;
+        color: #7e7e7e;
+        right: 50px;
+        font-family: 'Montserrat', italic;
+        margin: 0;
+        font-weight: normal;
+        text-align: left; /* Commence bien à gauche */
+        line-height: 1.6em;
+        white-space: pre-line; /* Respecte les sauts de ligne dans texte */
+        max-height: 200px;
+        overflow-y: auto;
+        padding-right: 10px;
+        /* Very subtle scrollbar like in the image */
+        scrollbar-width: thin;
+        scrollbar-color: #e0e0e0 transparent;
+      }
+     
+      /* Webkit scrollbar - very subtle */
+      .sous-titre::-webkit-scrollbar {
+        width: 4px;
+      }
+      
+      .sous-titre::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      .sous-titre::-webkit-scrollbar-thumb {
+        background: #e0e0e0;
+        border-radius: 2px;
+      }
+      
+      .sous-titre::-webkit-scrollbar-button {
+        display: none;
+      }
+.fils{
+  width: 100%;
+  height: 100%;
+}
+.iconsdiv{
+  display: flex;
+  flex-wrap:  wrap;
+  justify-content: flex-end; 
+  width: 93%;
+  height: 75%;
+  z-index: 100;
+  position: relative;
+}
+.iconsdiv a {
+  padding: 20px 15px;
+  margin: 1px;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background-color: #e4dbdb;
+
+   /* espace entre les icônes */
+}
+.ligne-icons {
+  position: absolute;
+  top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction:row;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 4px;
+  
+}
+
+/* Icônes */
+.ligne-icons a img {
+  padding: 10px 10px;
+  width: 25px;
+  height: 25px; 
+  object-fit: contain;
+  cursor: pointer;
+  background-color: #fbeded;
+  border-radius: 12px;
+  border: 1px solid #f9a1a1;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-btn1 {
+  background: #fff;
+  border: 2px solid #e20b33;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 170px;
+  height: 45px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 1px 4px #0001;
+}
+
+.dropdown-btn1-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.adherents-red {
+  color: #e20b33;
+  font-weight: bold;
+  font-size: 1.15em;
+  text-align: center;
+  line-height: 1.1;
+  margin-right: 6px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  display: inline-block;
+}
+
+.adherents-black {
+  color: #111;
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-right: 2px;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.adherents-arrow {
+  color: #111;
+  font-size: 1.1em;
+  margin-left: 2px;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.dropdown-btn {
+  background-color: white; /* Pas de fond pour le bouton dropdown */
+  border: 1px solid #f9a1a1;
+  border-radius: 12px;
+  cursor: pointer; /* Curseur pointeur */
+  width: 160px;
+  height: 46px;
+  font-family: 'Montserrat', italic;
+  color: #e20b33;
+ 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+ 
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  min-width: 140px;
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: #333;
+  font-family: 'Montserrat', italic;
+}
+
+
+.dropdown-content a:hover {
+  background-color: #eee;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.banniere-texte {
+  position: absolute;
+  top: 75px;
+  left: 15px;
+  width: 430px;
+
+
+  padding: 18px 18px 12px 18px;
+  z-index: 3;
+  text-align: center;
+}
+
+.banniere-titre {
+
+  font-size: 8.5pt;
+  color: #4a0f08;
+  font-family: 'Montserrat', italic;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin-top: 0;
+  line-height: 1.1em;
+}
+
+.banniere-soustitre {
+  font-family: 'Montserrat', italic;
+  font-size: 9pt;
+  color: #b41c1c;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.banniere-desc {
+  font-family: 'Montserrat', italic;
+  font-size: 10pt;
+  color: 101010;
+  
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.2em;
+}
+.banniere-desc b {
+  font-weight: bold;
+}
+.big-center-btn {
+  width: 580px;
+  position: relative;
+  height: 70px;
+  top: 210px;
+  background: transparent;
+  color: #501717;
+  border: none;
+  left: 35px;
+  border-radius: 12px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 24px auto 0 auto;
+  box-shadow: 0 2px 8px #0001;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.2;
+  padding: 0 10px;
+}
+
+.big-center-btn2 {
+  width: 580px;
+  position: relative;
+  height: 500px;
+  top: 208px;
+  background: transparent;
+  color: #501717;
+  border: none;
+  left: 35px;
+  border-radius: 12px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 600;
+  text-align: center;              /* Align text to the left */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;       /* Align content to the top left */
+  justify-content: flex-start;   /* Align content to the top */
+  margin: 24px auto 0 auto;
+  box-shadow: 0 2px 8px #0001;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.2;
+  padding: 18px 18px 0 18px;     /* Top padding for spacing */
+}
+
+.big-center-btn:hover {
+  background: #b41c1c;
+  color: #fff;
+}
+
+.big-center-btn2:hover {
+  background: #b41c1c;
+  color: #fff;
+}
+
+.para{
+  position: relative;
+  z-index: 1000;
+  top: 420px;
+  left: 150px;
+  color: #ed2727;
+  font-size: 0.8rem;
+}
+.para2{
+  position: relative;
+  z-index: 1000;
+  top: 380px;
+  left: 150px;
+  color: black;
+  font-size: 0.7rem;
+}
+
+.para-img{
+  position: relative;
+  z-index: 1000;
+  top: 430px;
+  left: 100px;
+  color: black;
+}
+
+.dropdown-btn-group {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background: transparent;
+  color: #b41c1c;
+  border: 1.5px solid #b41c1c;
+  border-radius: 8px;
+  font-family: 'Montserrat', italic;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-width: 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.dropdown-btn:hover,
+.dropdown-btn:focus {
+  background: #b41c1c;
+  color: #fff;
+}
+
+.dropdown-arrow {
+  font-size: 1.1em;
+  margin-top: 2px;
+}
+
+.dropdown-content-custom {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  z-index: 1001;
+  border: 1px solid #e0e0e0;
+  padding: 6px 0;
+}
+
+.dropdown-content-custom a {
+  color: #b41c1c;
+  padding: 10px 18px;
+  text-decoration: none;
+  display: block;
+  font-family: 'Montserrat', italic;
+  font-size: 1em;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-content-custom a:hover {
+  background: #f7eaea;
+  color: #a00;
+}
+
+/* Show dropdown on button hover or focus */
+.dropdown-btn-group:hover .dropdown-content-custom,
+.dropdown-btn-group:focus-within .dropdown-content-custom {
+  display: block;
+}
+.fille{
+width: 200px;
+height: 200px;
+position: absolute;
+top:400px;
+left: 122px;
+z-index: 1000;
+text-align: center;
+font-family: monts;
+}
+.over{
+  position: absolute;
+  right: 46px;
+  bottom: 179px;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <!-- Navbar -->
+      <div class="navbar">
+        <a href="accueil.html" class="icon1">
+          <img src="home.png" alt="Home" />
+        </a>
+        <a href="retour.html" class="icon2">
+          <img src="retour.png" alt="Retour" />
+        </a>
+        <div class="navbar-user-container">
+        <span class="navbar-user">Melani ADAM</span>
+        <img src="avatar.png" alt="Avatar" class="navbar-avatar" />
+        <span class="navbar-location">San Francisco, USA</span>
+        </div>
+        <div class="navbar-logo">
+          <img src="logologo.png" alt="Logo" />
+        </div>
+        <div class="navbar-search">
+          <img src="recherche.png" alt="Recherche" class="navbar-search-icon" />
+          <input type="text" placeholder="Recherche adherents par nom" />
+        </div>
+        <div class="navbar-btn-group">
+          <button class="navbar-btn">
+            <img src="+.png" alt="Plus" />
+          </button>
+          <button class="navbar-btn">
+            <img src="down.png" alt="Fleche" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Images fixes 
+      <img src="imagech.png" alt="Image Large" class="image-large" />-->
+      <img src="fenetre.png" alt="Fenêtre" class="image-fenetre" />
+      <p class="fille"><span style="font-weight: 900;">Melani ADAMS</span><br> Francisco. USA</p>
+      <img src="Groupe66.png" alt="Image au-dessus de la navbar" class="image-top" />
+      <p class="para">Vous etes membre du <b>MAFClub</b>,<br>
+        <span style="margin-left: 40px;">" Le Monde au féminin</span> <br>
+        <span style="margin-left: 50px;">de<b> San Francisco</b</span>
+      </p>
+
+      <img class="para-img" src="Calque 924.png" alt="">
+      <p class="para2">
+        <span style="margin-left: 30px;">Vous êtes inscrite au <b>CSRCP</b> <br></span> 
+         ( coeur seul recherche copilote ) <br> 
+        Si vous décidez de vous retirer <br>
+        du <b>CSRCP</b>, <b>CLIQUEZ-ICI</b>
+      </p>
+      
+      <img src="Rectangle arrondi 947.png" alt="Bannière" class="banniere" />
+      <div class="banniere-texte">
+        <div class="banniere-titre">En ce moment vous etes à<br>San Francisco</div>
+        <div class="banniere-soustitre">Et vous etes dans votre page d'accueil</div>
+        <div class="banniere-desc">Dans cette page, vous trouverez des adhérents et<br> adhérentes <b>à San Francisco</b> et à travers le monde <br>qui peuvent correspondre à vos critères</div>
+      </div>
+      <img src="Groupe 3.png" alt="Groupe 3" class="groupe3" />
+
+      <!-- Contenu principal -->
+      <section class="content">
+        <div class="main-content">
+          <!-- Ajoute ici le reste de ton contenu -->
+        </div>
+      </section>
+
+      <div class="image-wrapper">
+        <img src="Rectangle.png" alt="Image" class="image-position">
+        <img src="rectangle3.png" alt="Nouvelle image" class="image-position-2">
+        <img src="imagech.png" alt="Image Large" class="image-ch" />
+      </div>
+      <div class="center-actions">
+        
+      </div>
+      <button class="big-center-btn">
+        <b>A PROPOS DU CONCOURS DE L’IMAGE derrière la fenêtre</b>
+        <b>CLIQUEZ-ICI</b>pour telecharger une photo, une image, un dessins ou autre motif decoratif, etc..<br>
+        qui apparaitra derriere la fenettre au milieu de la page
+      </button>
+
+      <button class="big-center-btn2">
+      <p>
+        <span style="font-weight: 900;">Cliquez ici</span> pour consulter le score de la totalité de tous vos
+        eux et concours d'ekspecto, en dehors des 5 cités ci-dessous<br>
+        qui seront notés séparément .
+        </p>
+      </button>
+    </div>  
+    <!-- Section pour les icônes --> 
+    <div class="parent">
+      <div class="fils">
+      <div class="div1">  
+        <!-- Texte dans la première case -->
+        
+      </div>
+      <div class="iconsdiv">
+        <p style=" margin: 0; margin-top: 14px;padding: 10px; font-size: 15.5px; font-weight: bold; color: #9d4b45; font-family: 'Montserrat', italic;">
+          Jeux , concours , etc..<br>
+          
+        </p>
+        <a href="page2.html" class="div1"><img src="icones/iconmessage.png" alt="Icon 21" /></a>
+        <a href="page2.html" class="div2"><img src="icones/iconesvisage.png" alt="Icon 2" /></a>
+        <a href="page3.html" class="div3"><img src="icones/iconelettre.png" alt="Icon 3" /></a>
+        <a href="page4.html" class="div4"><img src="icones/iconschat.png" alt="Icon 4" /></a>
+        <a href="page5.html" class="div5"><img src="icones/iconscasque.png" alt="Icon 5" /></a>
+        <a href="page6.html" class="div6"><img src="icones/iconsfilm.png" alt="Icon 6" /></a>
+        <a href="page7.html" class="div7"><img src="icones/iconecamera.png" alt="Icon 7" /></a>
+        <a href="page8.html" class="div8"><img src="icones/iconscouleur.png" alt="Icon 8" /></a>
+        <a href="page9.html" class="div9"><img src="icones/iconpause.png" alt="Icon 9" /></a>
+        <a href="page10.html" class="div10"><img src="icones/iconemes.png" alt="Icon 10" /></a>
+        <a href="page11.html" class="div11"><img src="icones/iconsjournal.png" alt="Icon 11" /></a>
+        <a href="page12.html" class="div12"><img src="icones/iconvalise.png" alt="Icon 12" /></a>
+        <a href="page13.html" class="div13"><img src="icones/iconeemploye.png" alt="Icon 13" /></a>
+        <a href="page14.html" class="div14"><img src="icones/iconsmoney.png" alt="Icon 14" /></a>
+        <a href="page15.html" class="div15"><img src="icones/iconsapp.png" alt="Icon 15" /></a>
+        <a href="page16.html" class="div16"><img src="icones/iconsidée.png" alt="Icon 16" /></a>
+        <a href="page17.html" class="div17"><img src="icones/iconsstylo.png" alt="Icon 17" /></a>
+        <a href="page18.html" class="div18"><img src="icones/iconemonde.png" alt="Icon 18" /></a>
+        <a href="page19.html" class="div19"><img src="icones/iconspai.png" alt="Icon 19" /></a>
+        <a href="page20.html" class="div20"><img src="icones/iconpapillion.png" alt="Icon 20" /></a>
+        </div>
+    </div>
+  </div>
+    
+      <div class="titre-container">
+        <h2 class="titre-principal">Sommaire</h2>
+        <p class="sous-titre">Ma publication publique. 
+          Mon profil.   
+          A propos de ma ville, de nos us 
+          et coutumes. 
+          Ce que j’aime ou je n’aime pas,  
+          Les sports que je pratique. 
+          Mes hobbies.     
+          Mes amis.     
+          Mes groupes.     
+          Mes photos.      
+          Mes vidéos.     
+          Mon business en ligne. 
+          Mes hobbies.     
+          Mes amis.     
+          Mes groupes.     
+          Mes photos.      
+          Mes vidéos.     
+          Mon business en ligne. 
+          </p>
+      
+      </div>
+      <div style="background-color: #f1dede; margin: auto; width:93.5%; height: 40px; position: relative; top: -150px;">
+        <div style="display: flex; justify-content: space-between;">
+          <p style="margin-left: 30px; margin-top: 5px;">2</p>
+          <p style="margin-right: 1215px; margin-top: 5px;">5</p>
+      </div>
+      <img class="over" src="1104.png" alt="">
+      <div class="ligne-icons" >
+        <!-- 24 icônes -->
+        <a href="#" ><img src="icones/message.png" alt="Icon 1" /></a>
+        <a href="#" ><img src="icones/contact.png" alt="Icon 2" /></a>
+        <a href="#" ><img src="icones/plus.png" alt="Icon 3" /></a>
+        <a href="#" ><img src="icones/coeur.png" alt="Icon 4" /></a>
+        <a href="#" ><img src="icones/msn.png" alt="Icon 5" /></a>
+        <a href="#" ><img src="icones/coeurbrisé.png" alt="Icon 6" /></a>
+        <a href="#" ><img src="icones/cafe.png" alt="Icon 7" /></a>
+        <a href="#" ><img src="icones/vert.png" alt="Icon 8" /></a>
+        <a href="#" ><img src="icones/forchette.png" alt="Icon 9" /></a>
+        <a href="#" ><img src="icones/anniv.png" alt="Icon 10" /></a>
+        <a href="#" ><img src="icones/theatre.png" alt="Icon 11" /></a>
+        <a href="#" ><img src="icones/gateau.png" alt="Icon 12" /></a>
+        <a href="#" ><img src="icones/fleur.png" alt="Icon 13" /></a>
+        <a href="#" ><img src="icones/cadeau.png" alt="Icon 14" /></a>
+        <a href="#" ><img src="icones/marche.png" alt="Icon 15" /></a>
+        <a href="#" ><img src="icones/start.png" alt="Icon 16" /></a>
+        <a href="#" ><img src="icones/jeu.png" alt="Icon 17" /></a>
+        <a href="#" ><img src="icones/journall.png " alt="Icon 18" /></a>
+        <a href="#" ><img src="icones/balise.png  " alt="Icon 19" /></a>
+        <a href="#" ><img src="icones/salam.png" alt="Icon 20" /></a>
+        <a href="#" ><img src="icones/monsieur.png" alt="Icon 21" /></a>
+        <a href="#" ><img src="icones/iconsmoney.png" alt="Icon 22" /></a>
+        <a href="#" ><img src="icones/iconpapillion.png" alt="Icon 23" /></a>
+        <a href="#" ><img src="icones/iconemes.png" alt="Icon 24" /></a>
+        <div class="dropdown-btn-group">
+  <button class="dropdown-btn1">
+    <span class="dropdown-btn1-label">
+      <span class="adherents-red">Adherents<br>en ligne</span>
+      <span class="adherents-black">0</span>
+      <span class="adherents-arrow">&#9660;</span>
+    </span>
+  </button>
+  <div class="dropdown-content-custom">
+    <a href="#">Adhérent 1</a>
+    <a href="#">Adhérent 2</a>
+    <a href="#">Adhérent 3</a>
+    <!-- Ajoute d'autres options ici -->
+  </div>
+</div>
+        <!-- Dropdown -->
+        
+      </div>
+      
+        <script>
+        const dropdown = document.querySelector('.icon5');
+      
+        dropdown.addEventListener('click', () => {
+          dropdown.classList.toggle('open');
+          const expanded = dropdown.getAttribute('aria-expanded') === 'true';
+          dropdown.setAttribute('aria-expanded', !expanded);
+        });
+      
+        // Optionnel : fermer dropdown quand clic en dehors
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            dropdown.setAttribute('aria-expanded', 'false');
+          }
+        });
+        const icon3 = document.querySelector('.icon3');
+    const searchBar = document.getElementById('searchBar');
+
+    icon3.addEventListener('click', () => {
+      searchBar.classList.toggle('active');
+      if(searchBar.classList.contains('active')) {
+        searchBar.querySelector('input').focus();
+      }
+    });
+
+    // Optionnel : fermer la barre si clic en dehors
+    document.addEventListener('click', (e) => {
+      if (!icon3.contains(e.target) && !searchBar.contains(e.target)) {
+        searchBar.classList.remove('active');
+      }
+    });
+      </script>
+      <!-- -- Nouvelle image positionnée en bas à droite -->
+
+      
+      
+   
+
+
+    </div>
+  </body>
+  </html>
